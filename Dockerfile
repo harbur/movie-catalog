@@ -15,7 +15,8 @@ RUN yarn build
 RUN mkdir -p /var/www/html/ /run/nginx \
   && mv dist/* /var/www/html/
 
-COPY assets/default.conf /etc/nginx/conf.d/default.conf
+COPY assets/default.conf /etc/nginx/http.d/default.conf
+
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
