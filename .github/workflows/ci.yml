@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn build
+      # disabled steps for now
+      # - run: yarn lint
+      # - run: yarn test
