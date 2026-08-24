@@ -9,7 +9,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/prometheus/client_golang v1.24.1
 	github.com/sirupsen/logrus v1.10.1
-	github.com/stretchr/testify v1.12.0
+	github.com/stretchr/testify v1.12.1
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.1
 	github.com/swaggo/swag v1.16.6
@@ -63,6 +63,7 @@ require (
 	go.mongodb.org/mongo-driver/v2 v2.5.0 // indirect
 	go.uber.org/mock v0.6.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/arch v0.22.0 // indirect
 	golang.org/x/crypto v0.54.0 // indirect
 	golang.org/x/mod v0.37.0 // indirect
