@@ -6,12 +6,23 @@ import {
 } from "@/components/ui/resizable";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Film, Home } from "lucide-react";
+import { useDefaultLayout } from "react-resizable-panels";
 import { NavLink } from 'react-router-dom';
 
 interface SideMenuProps { children: any }
 export default function SideMenu({ children }: SideMenuProps) {
+  const { defaultLayout, onLayoutChange } = useDefaultLayout({
+    id: "layout",
+    storage: localStorage
+  });
+
   return (
-    <ResizablePanelGroup direction="horizontal" className="flex w-full" autoSaveId="layout">
+    <ResizablePanelGroup
+      orientation="horizontal"
+      className="flex w-full"
+      defaultLayout={defaultLayout}
+      onLayoutChange={onLayoutChange}
+    >
       <ResizablePanel defaultSize={25}>
         <Menu />
       </ResizablePanel>
