@@ -1,22 +1,28 @@
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table"
+import { ColumnDef, columnSizingFeature, columnVisibilityFeature, flexRender, RowData, rowSelectionFeature, tableFeatures, useTable } from "@tanstack/react-table"
 import { Skeleton } from "./skeleton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./table"
 
-interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[]
+export const dataTableFeatures = tableFeatures({
+    rowSelectionFeature,
+    columnSizingFeature,
+    columnVisibilityFeature,
+})
+
+interface DataTableProps<TData extends RowData> {
+    columns: ColumnDef<typeof dataTableFeatures, TData, any>[]
     data: TData[]
     loading?: boolean
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends RowData>({
     columns,
     data,
     loading,
-}: DataTableProps<TData, TValue>) {
-    const table = useReactTable({
+}: DataTableProps<TData>) {
+    const table = useTable({
+        features: dataTableFeatures,
         data,
         columns,
-        getCoreRowModel: getCoreRowModel(),
     })
 
     return (

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/ui/data-table";
+import { DataTable, dataTableFeatures } from "@/components/ui/data-table";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import Movie from "@/models/movie";
 import { useMovies } from "@/stores/movies";
@@ -11,7 +11,7 @@ import MovieActions from "./MovieActions";
 function MoviesTable() {
   const { data, isLoading, error } = useMovies();
 
-  const columns: ColumnDef<Movie>[] = [
+  const columns: ColumnDef<typeof dataTableFeatures, Movie>[] = [
     {
       accessorKey: 'id',
       header: 'ID',
