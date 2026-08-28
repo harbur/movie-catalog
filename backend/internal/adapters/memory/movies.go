@@ -7,8 +7,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/harbur/golang-gin-starter/internal/app"
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/app"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 // MovieRepository stores movies in memory, keyed by id.

@@ -1,0 +1,20 @@
+# Dependencies
+node_modules
+
+# Build output. The UI build lands in the backend's embed path; only the
+# placeholder that lets the embed compile without a build is tracked.
+backend/internal/adapters/ui/dist/*
+!backend/internal/adapters/ui/dist/.gitkeep
+tmp
+coverage.out
+
+# Logs
+*.log
+
+# Local overrides
+.env
+*.local
+
+# Editor and OS
+.idea
+.DS_Store

@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/harbur/golang-gin-starter/internal/config"
+	"github.com/harbur/movie-catalog/backend/internal/config"
 )
 
 func writeConfig(t *testing.T, contents string) string {
@@ -75,7 +75,7 @@ func TestLoadMissingFile(t *testing.T) {
 
 // TestShippedConfigIsValid guards the application.yaml committed to the repo.
 func TestShippedConfigIsValid(t *testing.T) {
-	t.Setenv("CONFIG_FILE", filepath.Join("..", "..", config.DefaultPath))
+	t.Setenv("CONFIG_FILE", filepath.Join("..", "..", "..", config.DefaultPath))
 
 	_, err := config.Load()
 

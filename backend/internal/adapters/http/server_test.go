@@ -11,11 +11,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	adapterhttp "github.com/harbur/golang-gin-starter/internal/adapters/http"
-	"github.com/harbur/golang-gin-starter/internal/adapters/memory"
-	"github.com/harbur/golang-gin-starter/internal/adapters/metrics"
-	"github.com/harbur/golang-gin-starter/internal/app"
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	adapterhttp "github.com/harbur/movie-catalog/backend/internal/adapters/http"
+	"github.com/harbur/movie-catalog/backend/internal/adapters/memory"
+	"github.com/harbur/movie-catalog/backend/internal/adapters/metrics"
+	"github.com/harbur/movie-catalog/backend/internal/app"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 func newTestHandler(t *testing.T) http.Handler {
@@ -25,8 +25,13 @@ func newTestHandler(t *testing.T) http.Handler {
 	actions, err := metrics.NewPrometheus(registry)
 	require.NoError(t, err)
 
+	ui := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = w.Write([]byte("<!doctype html><title>ui</title>"))
+	})
+
 	return adapterhttp.NewHandler(
-		adapterhttp.Options{Title: "Golang Starter", Version: "1.0.0", Gatherer: registry},
+		adapterhttp.Options{Title: "Movie Catalog", Version: "1.0.0", Gatherer: registry, UI: ui},
 		app.NewMovieService(memory.NewMovieRepository(), actions),
 		app.NewHealthService(domain.BuildInfo{}),
 	)
@@ -74,11 +79,19 @@ func TestHealthz(t *testing.T) {
 	}
 }
 
-func TestRootRedirectsToDocs(t *testing.T) {
-	w := do(t, newTestHandler(t), "GET", "/", "")
+func TestUIIsServedOnUnclaimedPaths(t *testing.T) {
+	handler := newTestHandler(t)
 
-	assert.Equal(t, http.StatusTemporaryRedirect, w.Code)
-	assert.Equal(t, "/docs", w.Header().Get("Location"))
+	// "/movies" is a client-side route: it must reach the SPA, not the API,
+	// whose movie collection lives under "/api/movies".
+	for _, path := range []string{"/", "/movies", "/movies/42"} {
+		t.Run(path, func(t *testing.T) {
+			w := do(t, handler, "GET", path, "")
+
+			assert.Equal(t, http.StatusOK, w.Code)
+			assert.Contains(t, w.Header().Get("Content-Type"), "text/html")
+		})
+	}
 }
 
 func TestDocsAndSpecAreServed(t *testing.T) {

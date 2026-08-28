@@ -1,9 +1,8 @@
 {
-  "name": "react-cra-starter",
+  "name": "movie-catalog-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://react-cra-starter.apps.harbur.io/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

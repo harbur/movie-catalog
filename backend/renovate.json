@@ -1,8 +1,0 @@
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>harbur/renovate-config"
-  ],
-  "automerge": true,
-  "automergeType": "branch"
-}

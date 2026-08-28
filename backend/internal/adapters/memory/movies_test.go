@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/harbur/golang-gin-starter/internal/adapters/memory"
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/adapters/memory"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 func TestCreateAssignsSequentialIDs(t *testing.T) {

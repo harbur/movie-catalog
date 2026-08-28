@@ -1,0 +1,5 @@
+image:
+  repository: spiddy/movie-catalog
+
+ingress:
+  enabled: false

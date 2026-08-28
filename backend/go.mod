@@ -1,4 +1,4 @@
-module github.com/harbur/golang-gin-starter
+module github.com/harbur/movie-catalog/backend
 
 go 1.25.0
 

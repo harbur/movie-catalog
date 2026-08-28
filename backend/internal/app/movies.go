@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 // MovieService holds the movie use cases.

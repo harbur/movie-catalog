@@ -1,0 +1,7 @@
+.git
+node_modules
+ui/node_modules
+backend/internal/adapters/ui/dist
+charts
+releases
+*.md

@@ -5,7 +5,7 @@ import (
 
 	"github.com/danielgtaylor/huma/v2"
 
-	"github.com/harbur/golang-gin-starter/internal/app"
+	"github.com/harbur/movie-catalog/backend/internal/app"
 )
 
 // HealthzOutput is the response of the healthz routes.

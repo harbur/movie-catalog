@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/harbur/golang-gin-starter/internal/app"
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/app"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 func TestHealthzReturnsBuildInfo(t *testing.T) {

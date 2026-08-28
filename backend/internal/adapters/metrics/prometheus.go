@@ -4,7 +4,7 @@ package metrics
 import (
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/harbur/golang-gin-starter/internal/app"
+	"github.com/harbur/movie-catalog/backend/internal/app"
 )
 
 // Prometheus counts use cases as they succeed.

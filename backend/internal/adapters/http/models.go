@@ -1,6 +1,6 @@
 package http
 
-import "github.com/harbur/golang-gin-starter/internal/domain"
+import "github.com/harbur/movie-catalog/backend/internal/domain"
 
 // Wire models live in the HTTP adapter and are deliberately distinct from the
 // domain types. Validation constraints are expressed as struct tags so they end

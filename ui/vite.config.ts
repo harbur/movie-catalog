@@ -5,10 +5,17 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    // The Go binary embeds the build output, so it is written straight into the
+    // embed path of the backend's ui adapter rather than into a local dist/.
+    outDir: path.resolve(__dirname, "../backend/internal/adapters/ui/dist"),
+    emptyOutDir: true,
+  },
   server: {
+    // In development the UI is served by Vite and the API by `make backend`,
+    // so /api is proxied to the backend's local listen address.
     proxy: {
-      // string shorthand: http://localhost:5173/foo -> http://localhost:4567/foo
-      '/api': 'https://react-cra-starter.apps.harbur.io/',
+      '/api': 'http://localhost:8080',
     },
   },
   resolve: {

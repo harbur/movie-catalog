@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/harbur/golang-gin-starter/internal/adapters/memory"
-	"github.com/harbur/golang-gin-starter/internal/app"
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/adapters/memory"
+	"github.com/harbur/movie-catalog/backend/internal/app"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 // countingActions is a fake for the ActionCounter port.

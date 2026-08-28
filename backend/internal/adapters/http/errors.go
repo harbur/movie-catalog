@@ -6,7 +6,7 @@ import (
 	"github.com/danielgtaylor/huma/v2"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 // mapError translates a domain error into an HTTP status. This is the one place

@@ -1,7 +1,0 @@
-# Configuration for golang-gin-starter. Delivered as a ConfigMap under a single
-# application key; override the location with CONFIG_FILE.
-#
-# Secrets do NOT belong here — they come from Google Secret Manager.
-server:
-  address: 0.0.0.0
-  port: 8080

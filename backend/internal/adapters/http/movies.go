@@ -6,8 +6,8 @@ import (
 	"github.com/danielgtaylor/huma/v2"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/harbur/golang-gin-starter/internal/app"
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/app"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 // movieIDInput carries the path parameter shared by the single-movie routes.

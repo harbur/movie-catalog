@@ -1,6 +1,6 @@
 package app
 
-import "github.com/harbur/golang-gin-starter/internal/domain"
+import "github.com/harbur/movie-catalog/backend/internal/domain"
 
 // HealthService reports whether the service is up and what is running.
 type HealthService struct {

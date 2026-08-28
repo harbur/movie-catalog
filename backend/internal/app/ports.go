@@ -3,7 +3,7 @@ package app
 import (
 	"context"
 
-	"github.com/harbur/golang-gin-starter/internal/domain"
+	"github.com/harbur/movie-catalog/backend/internal/domain"
 )
 
 // MovieRepository is the persistence port for movies. It is defined here, by
