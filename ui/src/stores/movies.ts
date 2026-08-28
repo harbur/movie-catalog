@@ -56,11 +56,7 @@ export function useCreateMovie() {
  */
 export function useDeleteMovie(movieID: number) {
   const queryClient = useQueryClient();
-  const mutationFn = async () => {
-    console.log('mutation about to trigger')
-    await deleteMovie(movieID);
-    console.log('mutation triggered')
-  };
+  const mutationFn = async () => deleteMovie(movieID);
   return useMutation({
     mutationFn,
     onSettled: async () => {

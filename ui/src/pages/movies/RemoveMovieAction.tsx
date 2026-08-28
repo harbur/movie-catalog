@@ -16,9 +16,17 @@ export default function RemoveMovieAction({ movie }: { movie: Movie }) {
   const closeDialog = () => setOpen(false)
 
   const onDelete = async () => {
-    console.log('ondeete about to trigger')
-    await mutateAsync();
-    console.log('ondeete triggered')
+    try {
+      await mutateAsync();
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Could not delete movie',
+        description: (error as Error).message,
+      });
+      return;
+    }
+
     toast({
       title: 'Movie Deleted',
       description: <span>Movie <b>{movie.name}</b> has been deleted.</span>

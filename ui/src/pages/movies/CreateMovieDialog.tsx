@@ -24,7 +24,19 @@ export default function CreateMovieDialog({ open, closeDialog }: { open: boolean
 
   // 2. Define a submit handler.
   async function onSubmit(values: CreateMovieForm) {
-    await mutateAsync(values);
+    try {
+      await mutateAsync(values);
+    } catch (error) {
+      // The dialog stays open with the values intact so the movie can be
+      // resubmitted; reporting success here would be a lie.
+      toast({
+        variant: 'destructive',
+        title: 'Could not create movie',
+        description: (error as Error).message,
+      });
+      return;
+    }
+
     form.reset();
     toast({
       title: 'Movie Created',

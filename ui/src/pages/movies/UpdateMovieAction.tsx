@@ -27,7 +27,17 @@ export default function UpdateMovieAction({ movie }: { movie: Movie }) {
   const closeDialog = () => setOpen(false)
 
   async function onSubmit(values: CreateMovieForm) {
-    await mutateAsync(values);
+    try {
+      await mutateAsync(values);
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Could not update movie',
+        description: (error as Error).message,
+      });
+      return;
+    }
+
     form.reset();
     toast({
       title: 'Movie Updated',
