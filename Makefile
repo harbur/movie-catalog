@@ -38,7 +38,7 @@ ui: ## Builds the UI into the backend embed path
 	@touch $(UI_DIST)/.gitkeep
 
 backend: ## Runs the backend only (listens at the address in application.yaml)
-	cd backend && go run $(CMD)
+	cd backend && CONFIG_FILE=../application.yaml go run $(CMD)
 
 dev: ## Runs the Vite dev server, proxying /api to a backend started with `make backend`
 	cd ui && yarn dev
