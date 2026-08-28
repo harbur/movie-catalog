@@ -17,7 +17,10 @@ spec:
     metadata:
       annotations:
         prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
         prometheus.io/scrape: "true"
+        # Roll the pods when the configuration changes.
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
         app.kubernetes.io/name: {{ include "golang-demo.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
@@ -27,6 +30,13 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CONFIG_FILE
+              value: /etc/golang-gin-starter/application.yaml
+          volumeMounts:
+            - name: config
+              mountPath: /etc/golang-gin-starter
+              readOnly: true
           ports:
             - name: http
               containerPort: 8080
@@ -41,6 +51,10 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "golang-demo.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

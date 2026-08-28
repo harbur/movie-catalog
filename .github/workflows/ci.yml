@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: make setup
 
-      - name: Generate swagger docs
-        run: make docs
+      - name: Vet
+        run: make lint
 
       - name: Run tests
         run: make test

@@ -1,16 +1,20 @@
 # Build Image
-FROM golang:1.24.6-bullseye AS build
-RUN apt-get update && apt-get install -y gcc libc-dev sqlite3
-WORKDIR /go/src/github.com/harbur/golang-gin-starter
-COPY Makefile .
-RUN make setup
+FROM golang:1.27-bookworm AS build
+WORKDIR /src
+
+COPY go.mod go.sum ./
+RUN go mod download
 
 COPY . .
-RUN make install
+# The API has no cgo dependency, so the binary is fully static.
+ENV CGO_ENABLED=0
+RUN make install GOBIN=/out
 
 # Runtime Image
-FROM golang:1.24.6-bullseye
-COPY --from=build /go/bin/golang-gin-starter /bin/
+FROM gcr.io/distroless/static-debian12:nonroot
+WORKDIR /app
+COPY --from=build /out/golang-gin-starter /bin/
+COPY application.yaml /app/application.yaml
 
 EXPOSE 8080
-CMD ["golang-gin-starter", "-address", "0.0.0.0:8080"]
+ENTRYPOINT ["golang-gin-starter"]

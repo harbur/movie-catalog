@@ -9,6 +9,12 @@ image:
   tag: main
   pullPolicy: Always
 
+# Rendered verbatim into the application.yaml ConfigMap key.
+application:
+  server:
+    address: 0.0.0.0
+    port: 8080
+
 nameOverride: ""
 fullnameOverride: ""
 
