@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 
 interface SideMenuProps { children: any }
 export default function SideMenu({ children }: SideMenuProps) {
-  const { defaultLayout, onLayoutChange } = useDefaultLayout({
+  const { defaultLayout, onLayoutChanged } = useDefaultLayout({
     id: "layout",
     storage: localStorage
   });
@@ -21,13 +21,13 @@ export default function SideMenu({ children }: SideMenuProps) {
       orientation="horizontal"
       className="flex w-full"
       defaultLayout={defaultLayout}
-      onLayoutChange={onLayoutChange}
+      onLayoutChanged={onLayoutChanged}
     >
-      <ResizablePanel defaultSize={25}>
+      <ResizablePanel id="menu" defaultSize="25%">
         <Menu />
       </ResizablePanel>
       <ResizableHandle />
-      <ResizablePanel defaultSize={75}>
+      <ResizablePanel id="content" defaultSize="75%">
         <div className="p-4 w-full h-full">
           {children}
         </div>
