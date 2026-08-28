@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "golang-demo.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "golang-demo.name" . }}
+    helm.sh/chart: {{ include "golang-demo.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  # The whole application configuration, under a single application key.
+  # Secrets do not belong here — they come from Google Secret Manager.
+  application.yaml: |
+    {{- toYaml .Values.application | nindent 4 }}
