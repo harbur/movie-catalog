@@ -12,8 +12,13 @@ import { useEffect, useRef } from "react";
  * @param  { string } evtType - A string that specifies the type of event to listen for. It can be 'keypress', 'keydown' or 'keyup'.
  */
 const useMousetrap = (handlerKey: string | string[], handlerCallback: () => void, evtType?: "keypress" | "keydown" | "keyup") => {
-  const actionRef:any = useRef(null);
-  actionRef.current = handlerCallback;
+  // Keep the latest callback in a ref so the Mousetrap binding below stays
+  // stable; writing it in an effect rather than during render.
+  const actionRef: any = useRef(handlerCallback);
+
+  useEffect(() => {
+    actionRef.current = handlerCallback;
+  }, [handlerCallback]);
 
   useEffect(() => {
     mousetrap.bind(handlerKey, (evt: ExtendedKeyboardEvent, combo: string | string[]) => {

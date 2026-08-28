@@ -9,7 +9,7 @@ export const dataTableFeatures = tableFeatures({
 })
 
 interface DataTableProps<TData extends RowData> {
-    columns: ColumnDef<typeof dataTableFeatures, TData, any>[]
+    columns: ColumnDef<typeof dataTableFeatures, TData, unknown>[]
     data: TData[]
     loading?: boolean
 }
