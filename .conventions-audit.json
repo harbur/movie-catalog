@@ -4,7 +4,7 @@
   "proposed": [
     {
       "gap": "router-data-mode",
-      "pr": null,
+      "pr": 8,
       "status": "open",
       "date": "2026-08-29"
     }
