@@ -1,0 +1,21 @@
+{
+  "last_audited": "2026-08-30",
+  "skill_commit": "de0f12e0eae97e2875332c9b4a6566fcbe02c490",
+  "proposed": [
+    {
+      "gap": "release-workflow-no-test-gate",
+      "pr": null,
+      "status": "open",
+      "date": "2026-08-30"
+    }
+  ],
+  "open_gaps": [
+    "ui-ci-no-lint-or-typecheck: .github/workflows/ci.yml's UI job only runs `yarn build`; eslint is configured (ui/eslint.config.js, `yarn lint` script) but never run in CI, where skills/infra-deploy/SKILL.md's CI/CD section asks for 'Tests and lint run in CI'.",
+    "backend-ci-no-linter: ci.yml's backend job runs only `go vet` and `go test`, no dedicated linter (e.g. golangci-lint), where skills/infra-deploy/SKILL.md's CI/CD section asks for 'Tests and lint run in CI' beyond vet.",
+    "image-tag-not-pure-sha: .github/workflows/release.yml tags non-tag-push images as `${branch}-${SHORT_SHA}-${TIMESTAMP}` rather than the commit SHA alone, where skills/infra-deploy/SKILL.md's CI/CD section asks for images tagged with the commit SHA as the immutable, traceable identifier that deployments reference.",
+    "react-router-not-data-mode: ui/src/App.tsx uses `BrowserRouter` + `Routes`/`Route` (declarative mode), where skills/frontend-react/SKILL.md's Routing section asks for react-router in data mode (`createBrowserRouter` + `RouterProvider`) with the route config in its own `routes.tsx`.",
+    "ui-not-atomic-design: ui/src/components is a flat folder with no atoms/molecules/organisms/templates split, where skills/frontend-react/SKILL.md's Structure section asks for Atomic Design (atoms/molecules/organisms/templates) under src/components/.",
+    "no-storybook: no Storybook is configured anywhere in ui/ (no .storybook directory, no storybook dependency in ui/package.json), where skills/frontend-react/SKILL.md's Visual testing section asks for Storybook with a story for every atom and molecule."
+  ],
+  "clean": false
+}
