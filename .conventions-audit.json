@@ -4,7 +4,7 @@
   "proposed": [
     {
       "gap": "release-workflow-no-test-gate",
-      "pr": null,
+      "pr": 13,
       "status": "open",
       "date": "2026-08-30"
     }
