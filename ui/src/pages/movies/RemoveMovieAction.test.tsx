@@ -50,4 +50,32 @@ describe('RemoveMovieAction', () => {
 
     expect(mockedUseDeleteMovie).toHaveBeenCalledWith(movie.id);
   });
+
+  it('keeps the dialog open and does not report success when the API call fails', async () => {
+    const mutateAsync = vi.fn().mockRejectedValue(new Error('movie is referenced elsewhere'));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockedUseDeleteMovie.mockReturnValue({ mutateAsync, isPending: false } as any);
+    const user = userEvent.setup();
+    renderAction();
+
+    await user.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button', { name: 'Delete movie' }));
+
+    await waitFor(() => expect(mutateAsync).toHaveBeenCalled());
+    // The confirmation dialog is only dismissed on success.
+    expect(screen.getByText(/Confirm deletion of movie/i)).toBeInTheDocument();
+  });
+
+  it('shows the pending state and disables the delete action while in flight', async () => {
+    const mutateAsync = vi.fn();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockedUseDeleteMovie.mockReturnValue({ mutateAsync, isPending: true } as any);
+    const user = userEvent.setup();
+    renderAction();
+
+    await user.click(screen.getByRole('button'));
+
+    expect(screen.getByText('Please wait')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+  });
 });

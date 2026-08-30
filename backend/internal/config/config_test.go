@@ -73,6 +73,18 @@ func TestLoadMissingFile(t *testing.T) {
 	assert.Contains(t, err.Error(), "read config")
 }
 
+// TestLoadFallsBackToDefaultPath covers the branch taken when CONFIG_FILE is
+// unset: Load must fall back to config.DefaultPath rather than an empty path.
+func TestLoadFallsBackToDefaultPath(t *testing.T) {
+	t.Setenv("CONFIG_FILE", "")
+	t.Chdir(t.TempDir())
+
+	_, err := config.Load()
+
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), config.DefaultPath)
+}
+
 // TestShippedConfigIsValid guards the application.yaml committed to the repo.
 func TestShippedConfigIsValid(t *testing.T) {
 	t.Setenv("CONFIG_FILE", filepath.Join("..", "..", "..", config.DefaultPath))
