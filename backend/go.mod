@@ -7,7 +7,7 @@ toolchain go1.27.0
 require (
 	github.com/danielgtaylor/huma/v2 v2.39.1
 	github.com/prometheus/client_golang v1.24.1
-	github.com/sirupsen/logrus v1.10.1
+	github.com/sirupsen/logrus v1.10.2
 	github.com/stretchr/testify v1.12.1
 	gopkg.in/yaml.v3 v3.0.1
 )
