@@ -47,5 +47,11 @@ jobs:
       - name: Install dependencies
         run: cd ui && yarn install --frozen-lockfile
 
+      - name: Lint
+        run: cd ui && yarn lint
+
+      - name: Run tests
+        run: cd ui && yarn test
+
       - name: Build
         run: cd ui && yarn build

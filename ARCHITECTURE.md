@@ -25,7 +25,6 @@ sidecar and no CDN step.
 │       ├── components/         # Reusable components, isolated from stores
 │       ├── ui/layouts/         # Reusable layouts
 │       └── pages/              # Pages of the application
-├── charts/movie-catalog/       # Helm chart
 ├── application.yaml            # The whole configuration, validated at startup
 ├── Dockerfile                  # UI stage → Go stage → runtime stage
 └── Makefile
