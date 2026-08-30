@@ -67,4 +67,31 @@ describe('CreateMovieDialog', () => {
     await waitFor(() => expect(mutateAsync).toHaveBeenCalled());
     expect(closeDialog).not.toHaveBeenCalled();
   });
+
+  it('resets the form once the dialog is closed', async () => {
+    // The wrapping Dialog is kept open throughout so its content stays
+    // mounted; only the `open` prop CreateMovieDialog itself reads is
+    // flipped, which is what its reset-on-close effect depends on.
+    const mutateAsync = vi.fn();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockedUseCreateMovie.mockReturnValue({ mutateAsync, isPending: false } as any);
+    const user = userEvent.setup();
+    const closeDialog = vi.fn();
+    const { rerender } = render(
+      <Dialog open>
+        <CreateMovieDialog open closeDialog={closeDialog} />
+      </Dialog>,
+    );
+
+    await user.type(screen.getByLabelText('Name'), 'Dune');
+    expect(screen.getByLabelText('Name')).toHaveValue('Dune');
+
+    rerender(
+      <Dialog open>
+        <CreateMovieDialog open={false} closeDialog={closeDialog} />
+      </Dialog>,
+    );
+
+    await waitFor(() => expect(screen.getByLabelText('Name')).toHaveValue(''));
+  });
 });

@@ -3,6 +3,7 @@ package http_test
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -208,4 +209,19 @@ func TestDeleteMovie(t *testing.T) {
 	assert.Equal(t, http.StatusNoContent, w.Code)
 	assert.Empty(t, w.Body.String())
 	assert.Equal(t, http.StatusNotFound, do(t, handler, "GET", "/api/movies/1", "").Code)
+}
+
+// TestRepositoryFailuresBecomeInternalServerErrors covers the error branches of
+// list-movies and delete-movie: the in-memory repository never fails either
+// call, so a failing fake is needed to reach them.
+func TestRepositoryFailuresBecomeInternalServerErrors(t *testing.T) {
+	registry := prometheus.NewRegistry()
+	actions, err := metrics.NewPrometheus(registry)
+	require.NoError(t, err)
+
+	svc := app.NewMovieService(failingMovieRepo{err: errors.New("boom")}, actions)
+	handler := adapterhttp.NewHandler(adapterhttp.Options{Title: "t", Version: "1.0.0"}, svc, app.NewHealthService(domain.BuildInfo{}))
+
+	assert.Equal(t, http.StatusInternalServerError, do(t, handler, "GET", "/api/movies", "").Code)
+	assert.Equal(t, http.StatusInternalServerError, do(t, handler, "DELETE", "/api/movies/1", "").Code)
 }
