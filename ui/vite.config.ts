@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     // The Go binary embeds the build output, so it is written straight into the
     // embed path of the backend's ui adapter rather than into a local dist/.
-    outDir: path.resolve(__dirname, "../backend/internal/adapters/ui/dist"),
+    outDir: path.resolve(import.meta.dirname, "../backend/internal/adapters/ui/dist"),
     emptyOutDir: true,
   },
   server: {
@@ -20,7 +20,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
   test: {
