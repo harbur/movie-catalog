@@ -7,6 +7,7 @@ backend/internal/adapters/ui/dist/*
 !backend/internal/adapters/ui/dist/.gitkeep
 tmp
 coverage.out
+coverage
 
 # Logs
 *.log
