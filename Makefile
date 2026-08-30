@@ -45,6 +45,7 @@ dev: ## Runs the Vite dev server, proxying /api to a backend started with `make 
 
 test: ## Runs tests
 	cd backend && go test $(ALL)
+	cd ui && yarn test
 
 lint: ## Runs go vet and eslint
 	cd backend && go vet $(ALL)

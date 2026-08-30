@@ -25,4 +25,13 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    // Vendored shadcn/ui components: the CLI generates one file per component
+    // that co-locates its variant/feature helpers with the component itself,
+    // so this Vite-only HMR hint doesn't apply here.
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 )

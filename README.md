@@ -6,7 +6,6 @@ API and embeds the built React UI, so one binary and one container ship both.
 ```
 backend/   Go service — hexagonal architecture, Huma REST API
 ui/        React app — shadcn/ui, TanStack Query, Tailwind
-charts/    Helm chart
 ```
 
 ## Running it
