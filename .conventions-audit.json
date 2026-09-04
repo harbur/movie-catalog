@@ -1,16 +1,28 @@
 {
-  "last_audited": "2026-08-29",
-  "skill_commit": "de0f12e0eae97e2875332c9b4a6566fcbe02c490",
+  "last_audited": "2026-09-04",
+  "skill_commit": "ec815081a2fe7eeb1e8377978617b6cf5eadccf7",
   "proposed": [
     {
       "gap": "router-data-mode",
       "pr": 8,
-      "status": "open",
+      "status": "merged",
       "date": "2026-08-29"
+    },
+    {
+      "gap": "release-workflow-no-test-gate",
+      "pr": 13,
+      "status": "rejected",
+      "date": "2026-08-30"
+    },
+    {
+      "gap": "backend-postgres-persistence",
+      "pr": 22,
+      "status": "open",
+      "date": "2026-09-04"
     }
   ],
   "open_gaps": [
-    "backend-postgres-persistence: backend-go convention requires Postgres via pgx with numbered SQL migrations under migrations/; the repo's only MovieRepository implementation is in-memory (backend/internal/adapters/memory), with no database adapter or migrations at all",
+    "backend-postgres-persistence-wiring: this run added a real Postgres adapter (backend/internal/adapters/postgres, pgx + numbered migrations) implementing app.MovieRepository, but cmd/movie-catalog/main.go still wires up internal/adapters/memory by default. Follow-up: add a Database config section (validated on load, password from an env var per the Secret Manager convention, not application.yaml), switch main.go's wiring, add a Postgres service to ci.yml so the new adapter tests run in CI instead of skipping, and add a docker-compose service (or equivalent) for local dev.",
     "frontend-atomic-design: frontend-react convention wants src/components/{atoms,molecules,organisms,templates}; the repo only has components/ui (shadcn) and components/molecules, with domain-aware components (CreateMovieDialog, MovieActions, RemoveMovieAction, UpdateMovieAction) living directly under pages/movies instead of components/organisms",
     "frontend-storybook: frontend-react convention requires a story for every atom and molecule; the repo has no Storybook setup and no *.stories.tsx files at all"
   ],
