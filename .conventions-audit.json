@@ -16,7 +16,7 @@
     },
     {
       "gap": "backend-postgres-persistence",
-      "pr": null,
+      "pr": 22,
       "status": "open",
       "date": "2026-09-04"
     }
