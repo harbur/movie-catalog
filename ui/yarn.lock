@@ -348,9 +348,9 @@
   integrity sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==
 
 "@hookform/resolvers@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-6.0.0.tgz#1c33be45bafddc9890fe938730f8b5eb09bb6137"
-  integrity sha512-6iBzQnB+YwAveVc8HUi6QYLITn5X+xNKRMFIcNXHZlvp2aTI7yWbj4n/JodXxirMCcBc4VCjb2aYAJh4x07mVw==
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-6.0.2.tgz#9d7e0c6d7f076b6f8dc7d10190e3c71d7e65d20d"
+  integrity sha512-e2dqUOlaGuirKVOd/iZWk/Yg5zeaGw7t0hSc3LzxL3o7eZGwZkTyEbBL8H52m0wRKEsNLWoMGOiXGHbPHTXlEQ==
   dependencies:
     "@standard-schema/utils" "^0.3.0"
 
